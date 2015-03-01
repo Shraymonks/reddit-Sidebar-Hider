@@ -1,0 +1,19 @@
+/* Normalize some margins */
+#siteTable {
+  margin-right: 0 !important;
+}
+.content {
+  margin-right: 5px !important;
+  overflow: auto !important;
+}
+.link {
+  margin-right: 5px !important;
+}
+
+/* Toggle link */
+.toggle-sidebar {
+  cursor: pointer;
+}
+.toggle-sidebar:hover {
+  text-decoration: underline;
+}

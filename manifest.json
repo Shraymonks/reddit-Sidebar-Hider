@@ -1,0 +1,18 @@
+{
+  "author": "Shraymonks",
+  "content_scripts": [{
+    "css": ["style.css"],
+    "js": ["script.js"],
+    "matches": ["*://*.reddit.com/*"],
+    "run_at": "document_start"
+  }],
+  "description": "Hide the reddit sidebar!",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "reddit Sidebar Hider",
+  "permissions": ["storage"],
+  "version": "1.0.0"
+}
