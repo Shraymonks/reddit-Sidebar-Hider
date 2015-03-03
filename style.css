@@ -4,7 +4,7 @@
 }
 .content {
   margin-right: 5px !important;
-  overflow: auto !important;
+  overflow: hidden !important;
 }
 .link {
   margin-right: 5px !important;
