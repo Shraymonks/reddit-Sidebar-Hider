@@ -1,13 +1,13 @@
 /* Normalize some margins */
-#siteTable {
+#siteTable, .commentarea, .link {
   margin-right: 0 !important;
 }
 .content[role="main"] {
   margin-right: 5px !important;
   overflow: hidden !important;
 }
-.link {
-  margin-right: 5px !important;
+.side {
+  margin-left: 5px !important;
 }
 
 /* Toggle link */
