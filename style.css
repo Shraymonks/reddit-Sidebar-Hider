@@ -1,12 +1,14 @@
 /* Normalize some margins */
-#siteTable, .commentarea, .link {
+#siteTable#siteTable, .commentarea.commentarea, .link.link {
   margin-right: 0 !important;
+  padding-right: 0px !important;
 }
 .content[role="main"] {
   margin-right: 5px !important;
   overflow: hidden !important;
+  padding-right: 0 !important
 }
-.side {
+.side.side {
   margin-left: 5px !important;
 }
 
