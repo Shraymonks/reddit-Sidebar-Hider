@@ -2,7 +2,7 @@ var isHidden = false;
 
 // Setup sidebar CSS with initial toggle setting
 //
-// This is done here with an injected <style> instead of 
+// This is done here with an injected <style> instead of
 // adding a class to .side to prevent any reflow or flash
 // from initially hiding the sidebar
 chrome.storage.local.get({isHidden: false}, function(items) {
