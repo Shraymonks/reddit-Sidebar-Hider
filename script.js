@@ -13,12 +13,9 @@ chrome.storage.local.get({isHidden: false}, function(items) {
   // style.sheet gets created after style is inserted into the DOM
   document.head.appendChild(style);
 
-  if (isHidden) {
-    style.sheet.insertRule('.side:not(.toggle) {display: none}', 0);
-  }
-  else {
-    style.sheet.insertRule('.side.toggle {display: none}', 0);
-  }
+  var sidebarSelector = isHidden ? '.side:not(.toggle)' : '.side.toggle';
+
+  style.sheet.insertRule(sidebarSelector + ' {display: none}', 0);
 });
 
 // Create the toggle link
