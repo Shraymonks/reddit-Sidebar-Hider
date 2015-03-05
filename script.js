@@ -4,7 +4,7 @@ var isHidden = false;
 //
 // This is done here with an injected <style> instead of
 // adding a class to .side to prevent any reflow or flash
-// from initially hiding the sidebar
+// while initially hiding the sidebar
 chrome.storage.local.get({isHidden: false}, function(items) {
   var style = document.createElement('style');
 
