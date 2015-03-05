@@ -14,9 +14,11 @@ chrome.storage.local.get({isHidden: false}, function(items) {
   document.head.appendChild(style);
 
   if (isHidden) {
-    style.sheet.insertRule('.side {display: none}', 0);
+    style.sheet.insertRule('.side:not(.toggle) {display: none}', 0);
   }
-  style.sheet.insertRule('.side.toggle {display: ' + (isHidden ? 'block' : 'none') + '}', style.sheet.length);
+  else {
+    style.sheet.insertRule('.side.toggle {display: none}', 0);
+  }
 });
 
 // Create the toggle link
