@@ -48,9 +48,27 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   // style.sheet gets created after style is inserted into the DOM
   document.head.appendChild(style);
 
-  var sidebarSelector = isHidden ? '.side:not(.toggle)' : '.side.toggle';
+  var sideSelector = isHidden ? '.side:not(.toggle)' : '.side.toggle';
 
-  style.sheet.insertRule(sidebarSelector + ' {display: none}', 0);
+  // Hiding the sidebar like this instead of `display: none;` allows
+  // absolutely positioned headers in subreddit themes to still appear
+  style.sheet.insertRule(
+    sideSelector + ' {' +
+      'height: 0 !important;' +
+      'margin: 0 !important;' +
+      'padding: 0 !important;' +
+      'width: 0 !important}',
+    0
+  );
+  // Hide other absolute elements that may appear in some themes
+  style.sheet.insertRule(
+    sideSelector + '::after,' +
+    sideSelector + '::before,' +
+    sideSelector + ' .spacer > :not(.titlebox),' +
+    sideSelector + ' .titlebox > :not(.usertext),' +
+    sideSelector + ' .md > p {display: none}',
+    1
+  );
 
   pageStyles = items.pageStyles;
   pageStyle = pageStyles[page];
