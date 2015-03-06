@@ -20,14 +20,14 @@ chrome.storage.local.get({isHidden: false}, function(items) {
 
 // Create the toggle link
 document.addEventListener('DOMContentLoaded', function() {
+  var side = document.getElementsByClassName('side')[0];
+
+  // Make sure there's a sidebar
+  if (!side) return;
+
   var header = document.getElementById('header-bottom-right');
-
-  // Make sure reddit works
-  if (!header) return;
-
   var fragment = document.createDocumentFragment();
   var separator = header.getElementsByClassName('separator')[0].cloneNode(true);
-  var side = document.getElementsByClassName('side')[0];
   var toggle = document.createElement('a');
 
   toggle.className = 'toggle-sidebar';
