@@ -6,6 +6,7 @@
     "matches": [
       "*://*.reddit.com/",
       "*://*.reddit.com/?*",
+      "*://*.reddit.com/account-activity",
       "*://*.reddit.com/ads/*",
       "*://*.reddit.com/controversial/*",
       "*://*.reddit.com/domain/*",
