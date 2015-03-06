@@ -1,4 +1,8 @@
-/* Normalize some margins */
+/* Normalize some margins
+ *
+ * Redundant selectors like `.side.side` are to increase specificity
+ * to safeguard against subreddits that use `!important`
+ */
 #siteTable#siteTable, .commentarea.commentarea, .link.link {
   margin-right: 0 !important;
   padding-right: 0px !important;
