@@ -11,6 +11,12 @@
 .side.side {
   margin-left: 5px !important;
 }
+.wiki-page-content {
+  margin-right: 15px !important;
+}
+.infobar, .searchpane {
+  margin-right: 0 !important;
+}
 
 /* Toggle link */
 .toggle-sidebar {
