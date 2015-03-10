@@ -22,6 +22,9 @@
 .infobar, .searchpane {
   margin-right: 0 !important;
 }
+.panestack-title {
+  margin-right: 10px !important;
+}
 
 /* Toggle link */
 .toggle-sidebar {
