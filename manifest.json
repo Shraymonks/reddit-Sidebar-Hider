@@ -2,6 +2,11 @@
   "author": "Shraymonks",
   "content_scripts": [{
     "css": ["style.css"],
+    "exclude_matches": [
+      "*://*.reddit.com/*.compact",
+      "*://*.reddit.com/*.mobile",
+      "*://i.reddit.com/*"
+    ],
     "js": ["script.js"],
     "matches": [
       "*://*.reddit.com/",
