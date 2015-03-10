@@ -5,6 +5,7 @@
     "exclude_matches": [
       "*://*.reddit.com/*.compact",
       "*://*.reddit.com/*.mobile",
+      "*://*.reddit.com/subreddits/create",
       "*://i.reddit.com/*"
     ],
     "js": ["script.js"],
@@ -27,6 +28,7 @@
       "*://*.reddit.com/submit/*",
       "*://*.reddit.com/submit?*",
       "*://*.reddit.com/subreddits/*",
+      "*://*.reddit.com/subreddits?*",
       "*://*.reddit.com/top/*",
       "*://*.reddit.com/user/*",
       "*://*.reddit.com/wiki/*"
