@@ -9,6 +9,7 @@
 }
 .content[role="main"] {
   margin-right: 5px !important;
+  max-width: none !important;
   overflow: hidden !important;
   padding-right: 0 !important
 }
