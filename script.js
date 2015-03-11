@@ -34,7 +34,7 @@ var insertRule = function(elem, elemStyle) {
       selector = '#siteTable#siteTable';
       break;
   }
-  style.sheet.insertRule(createRule(selector, elemStyle), style.sheet.length);
+  style.sheet.insertRule(createRule(selector, elemStyle), style.sheet.cssRules.length);
 };
 
 // Setup sidebar CSS with initial toggle setting
@@ -56,6 +56,7 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
     sideSelector + ' {' +
       'height: 0 !important;' +
       'margin: 0 !important;' +
+      'overflow: hidden !important;' +
       'padding: 0 !important;' +
       'width: 0 !important}',
     0
@@ -64,9 +65,10 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   style.sheet.insertRule(
     sideSelector + '::after,' +
     sideSelector + '::before,' +
+    sideSelector + ' *::after,' +
     sideSelector + ' .spacer > :not(.titlebox),' +
     sideSelector + ' .titlebox > :not(.usertext),' +
-    sideSelector + ' .md > p {display: none}',
+    sideSelector + ' .md > p {display: none !important}',
     1
   );
 
@@ -116,42 +118,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var newStyles = false;
 
+  var updateStyle = function(options) {
+    if (options.cond) {
+      pageStyle[options.elem] = pageStyle[options.elem] || {};
+      pageStyle[options.elem][options.prop] = options.value;
+      var rule = {};
+      rule[options.prop] = options.value;
+      insertRule(options.elem, rule);
+      newStyles = true;
+    }
+  };
+
   // Theme margins are stored so that they can be applied before the DOM is loaded
   // on subsequent page loads, elimintating reflow
-  var mainStyle = getComputedStyle(main);
-  if (mainStyle.marginLeft !== mainStyle.marginRight) {
-    pageStyle.main = pageStyle.main || {};
-    pageStyle.main['margin-right'] = mainStyle.marginLeft;
-    insertRule('main', {'margin-right': mainStyle.marginLeft});
-    newStyles = true;
-  }
 
+  var mainStyle = getComputedStyle(main);
   var sideStyle = getComputedStyle(side);
-  var sideMarginLeft = Math.max(
-    parseInt(sideStyle.marginRight, 10),
-    parseInt(mainStyle.marginLeft, 10)
-  ) + 'px';
-  if (sideStyle.marginLeft !== sideMarginLeft) {
-    pageStyle.side = pageStyle.side || {};
-    pageStyle.side['margin-left'] = sideMarginLeft;
-    insertRule('side', {'margin-left': sideMarginLeft});
-    newStyles = true;
-  }
+
+  updateStyle({
+    cond: mainStyle.marginLeft !== mainStyle.marginRight,
+    elem: 'main',
+    prop: 'margin-right',
+    value: mainStyle.marginLeft
+  });
+  // Fix r/AskHistorians
+  updateStyle({
+    cond: parseInt(mainStyle.marginTop, 10) < 0,
+    elem: 'main',
+    prop: 'margin-top',
+    value: 0
+  });
+
+  updateStyle({
+    cond: sideStyle.marginLeft !== mainStyle.marginLeft,
+    elem: 'side',
+    prop: 'margin-left',
+    value: mainStyle.marginLeft
+  });
 
   if (siteTable) {
     var siteTableStyle = getComputedStyle(siteTable);
-    if (siteTableStyle.marginLeft !== siteTableStyle.marginRight) {
-      pageStyle.siteTable = pageStyle.siteTable || {};
-      pageStyle.siteTable['margin-right'] = siteTableStyle.marginLeft;
-      insertRule('siteTable', {'margin-right': siteTableStyle.marginLeft});
-      newStyles = true;
-    }
-    if (siteTableStyle.paddingLeft !== siteTableStyle.paddingRight) {
-      pageStyle.siteTable = pageStyle.siteTable || {};
-      pageStyle.siteTable['padding-right'] = siteTableStyle.paddingLeft;
-      insertRule('siteTable', {'padding-right': siteTableStyle.paddingLeft});
-      newStyles = true;
-    }
+
+    updateStyle({
+      cond: siteTableStyle.marginLeft !== siteTableStyle.marginRight,
+      elem: 'siteTable',
+      prop: 'margin-right',
+      value: siteTableStyle.marginLeft
+    });
+    updateStyle({
+      cond: siteTableStyle.paddingLeft !== siteTableStyle.paddingRight,
+      elem: 'siteTable',
+      prop: 'padding-right',
+      value: siteTableStyle.paddingLeft
+    });
   }
 
   if (newStyles) {
