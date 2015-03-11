@@ -54,6 +54,7 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   // absolutely positioned headers in subreddit themes to still appear
   style.sheet.insertRule(
     sideSelector + ' {' +
+      'border: 0 !important;' +
       'height: 0 !important;' +
       'margin: 0 !important;' +
       'overflow: hidden !important;' +
