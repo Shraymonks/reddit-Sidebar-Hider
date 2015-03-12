@@ -1,3 +1,5 @@
+'use strict';
+
 var isHidden = false;
 var style = document.createElement('style');
 // Key used to store styles for this page; either r/subreddit or the root pathname
