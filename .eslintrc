@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "chrome": false
+  },
+  "rules": {
+    "curly": 0,
+    "quotes": [2, "single"]
+  }
+}
