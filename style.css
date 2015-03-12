@@ -3,7 +3,7 @@
  * Redundant selectors like `.side.side` are to increase specificity
  * to safeguard against subreddits that use `!important`
  */
-#siteTable#siteTable, .commentarea.commentarea, .link.link.link {
+#siteTable#siteTable, .commentarea.commentarea, #siteTable .link.link.link {
   margin-right: 0 !important;
   padding-right: 0px !important;
 }
