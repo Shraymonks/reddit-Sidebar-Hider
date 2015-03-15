@@ -20,7 +20,7 @@
 .wiki-page-content {
   margin-right: 15px !important;
 }
-.infobar, .searchpane, .snoovatar-page, .commentarea .sitetable .comment.comment {
+.infobar, .searchpane, .snoovatar-page, .commentarea .sitetable .comment.comment, .sitetable::before {
   margin-right: 0 !important;
 }
 .panestack-title {
