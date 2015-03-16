@@ -7,7 +7,7 @@
   margin-right: 0 !important;
   padding-right: 0px !important;
 }
-.content[role="main"] {
+.content.content[role="main"] {
   clear: left;
   margin-right: 5px !important;
   max-width: none !important;

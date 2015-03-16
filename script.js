@@ -27,7 +27,7 @@ var insertRule = function(elem, elemStyle) {
   var selector;
   switch (elem) {
     case 'main':
-      selector = '.content[role="main"]';
+      selector = '.content.content[role="main"]';
       break;
     case 'side':
       selector = '.side.side';
