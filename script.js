@@ -144,6 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
     prop: 'margin-right',
     value: mainStyle.marginLeft
   });
+  updateStyle({
+    cond: mainStyle.paddingLeft !== mainStyle.paddingRight,
+    elem: 'main',
+    prop: 'padding-right',
+    value: mainStyle.paddingLeft
+  });
   // Fix r/AskHistorians
   updateStyle({
     cond: parseInt(mainStyle.marginTop, 10) < 0,
