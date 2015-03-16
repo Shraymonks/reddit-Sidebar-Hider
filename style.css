@@ -12,7 +12,8 @@
   margin-right: 5px !important;
   max-width: none !important;
   overflow: hidden !important;
-  padding-right: 0 !important
+  padding-right: 0 !important;
+  width: auto !important;
 }
 .side.side {
   margin-left: 5px !important;
