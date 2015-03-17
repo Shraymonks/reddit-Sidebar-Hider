@@ -50,7 +50,8 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   // style.sheet gets created after style is inserted into the DOM
   document.head.appendChild(style);
 
-  var sideSelector = isHidden ? '.side:not(.toggle)' : '.side.toggle';
+  var bodySelector = isHidden ? 'body:not(.side-toggle)' : 'body.side-toggle';
+  var sideSelector = bodySelector + ' .side';
 
   // Hiding the sidebar like this instead of `display: none;` allows
   // absolutely positioned headers in subreddit themes to still appear
@@ -68,7 +69,7 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   style.sheet.insertRule(
     sideSelector + '::after,' +
     sideSelector + '::before,' +
-    sideSelector + ' *::after,' +
+    sideSelector + ' ::after,' +
     sideSelector + ' .spacer > :not(.titlebox),' +
     sideSelector + ' .titlebox > :not(.usertext),' +
     sideSelector + ' .md > p {display: none !important}',
@@ -83,6 +84,26 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
     for (var elem in pageStyle) {
       insertRule(elem, pageStyle[elem]);
     }
+  }
+
+  // Page specific compatibility CSS
+  switch (page) {
+    case 'r/movies':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox > .subscribers,' +
+        sideSelector + ' .titlebox > .users-online {display: block !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        sideSelector + ' .number::after {display: inline !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        bodySelector + ' .usertext-body h3:last-of-type a,' +
+        bodySelector + ' input[name="uh"] ~ a::after {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      break;
   }
 });
 
@@ -104,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
   toggle.innerText = 'Toggle sidebar';
   toggle.addEventListener('click', function() {
     isHidden = !isHidden;
-    side.classList.toggle('toggle');
+    document.body.classList.toggle('side-toggle');
     chrome.storage.local.set({isHidden: isHidden});
   });
 
