@@ -47,8 +47,7 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   // style.sheet gets created after style is inserted into the DOM
   document.head.appendChild(style);
 
-  var bodySelector = isHidden ? 'body:not(.side-toggle)' : 'body.side-toggle';
-  var sideSelector = bodySelector + ' .side';
+  var sideSelector = isHidden ? '.side:not(.side-toggle)' : '.side.side-toggle';
 
   // Hiding the sidebar like this instead of `display: none;` allows
   // absolutely positioned headers in subreddit themes to still appear
@@ -101,9 +100,10 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         sideSelector + ' .number::after {display: inline !important}',
         style.sheet.cssRules.length
       );
+      var headerSelector = isHidden ? '#header-bottom-right:not(.side-toggle)' : '#header-bottom-right.side-toggle';
       style.sheet.insertRule(
-        bodySelector + ' .usertext-body h3:last-of-type a,' +
-        bodySelector + ' input[name="uh"] ~ a::after {display: none !important}',
+        headerSelector + ' .usertext-body h3:last-of-type a,' +
+        headerSelector + ' input[name="uh"] ~ a::after {display: none !important}',
         style.sheet.cssRules.length
       );
       break;
@@ -128,7 +128,15 @@ document.addEventListener('DOMContentLoaded', function() {
   toggle.innerText = 'Toggle sidebar';
   toggle.addEventListener('click', function() {
     isHidden = !isHidden;
-    document.body.classList.toggle('side-toggle');
+    side.classList.toggle('side-toggle');
+
+    // Page specific classes for compatibility
+    switch (page) {
+      case 'r/movies':
+        header.classList.toggle('side-toggle');
+        break;
+    }
+
     chrome.storage.local.set({isHidden: isHidden});
   });
 
