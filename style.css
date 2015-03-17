@@ -24,7 +24,7 @@
 .infobar, .searchpane, .snoovatar-page, .commentarea .sitetable .comment.comment, .sitetable::before {
   margin-right: 0 !important;
 }
-.panestack-title {
+.menuarea, .panestack-title {
   margin-right: 10px !important;
 }
 
