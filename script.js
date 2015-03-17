@@ -1,14 +1,17 @@
 'use strict';
 
 var isHidden = false;
-var style = document.createElement('style');
+
 // Key used to store styles for this page; either r/subreddit or the root pathname
 var page = (function() {
   var path = location.pathname.split('/');
   return path[1] === 'r' ? 'r/' + path[2] : path[1];
 }());
+
 var pageStyle = {};
 var pageStyles = {};
+
+var style = document.createElement('style');
 
 var createRule = function(selector, elemStyle) {
   var rule = selector + '{';
@@ -19,24 +22,18 @@ var createRule = function(selector, elemStyle) {
   return rule + '}';
 };
 
-var insertRule = function(elem, elemStyle) {
-  if (Object.keys(elemStyle).length === 0) return;
+// Redundant selectors like `.side.side` are to increase specificity
+// to safeguard against subreddits that use `!important`
+var selectors = {
+  main: '.content.content[role="main"]',
+  side: '.side.side',
+  siteTable: '#siteTable#siteTable'
+};
 
-  // Redundant selectors like `.side.side` are to increase specificity
-  // to safeguard against subreddits that use `!important`
-  var selector;
-  switch (elem) {
-    case 'main':
-      selector = '.content.content[role="main"]';
-      break;
-    case 'side':
-      selector = '.side.side';
-      break;
-    case 'siteTable':
-      selector = '#siteTable#siteTable';
-      break;
+var insertRule = function(elem, elemStyle) {
+  if (Object.keys(elemStyle).length > 0) {
+    style.sheet.insertRule(createRule(selectors[elem], elemStyle), style.sheet.cssRules.length);
   }
-  style.sheet.insertRule(createRule(selector, elemStyle), style.sheet.cssRules.length);
 };
 
 // Setup sidebar CSS with initial toggle setting
