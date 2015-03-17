@@ -85,6 +85,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
 
   // Page specific compatibility CSS
   switch (page) {
+    case 'r/magictcg':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox .usertext-body .md h6 {right: 5px !important}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/movies':
       style.sheet.insertRule(
         sideSelector + ' .titlebox > .subscribers,' +
