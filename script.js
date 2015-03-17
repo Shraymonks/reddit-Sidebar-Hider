@@ -5,7 +5,7 @@ var isHidden = false;
 // Key used to store styles for this page; either r/subreddit or the root pathname
 var page = (function() {
   var path = location.pathname.split('/');
-  return path[1] === 'r' ? 'r/' + path[2] : path[1];
+  return (path[1] === 'r' ? 'r/' + path[2] : path[1]).toLowerCase();
 }());
 
 var pageStyle = {};
