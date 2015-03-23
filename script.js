@@ -83,6 +83,7 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   }
 
   // Page specific compatibility CSS
+  var headerSelector = isHidden ? '#header-bottom-right:not(.side-toggle)' : '#header-bottom-right.side-toggle';
   switch (page) {
     case 'r/magictcg':
       style.sheet.insertRule(
@@ -100,10 +101,35 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         sideSelector + ' .number::after {display: inline !important}',
         style.sheet.cssRules.length
       );
-      var headerSelector = isHidden ? '#header-bottom-right:not(.side-toggle)' : '#header-bottom-right.side-toggle';
       style.sheet.insertRule(
         headerSelector + ' .usertext-body h3:last-of-type a,' +
         headerSelector + ' input[name="uh"] ~ a::after {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      break;
+    case 'r/wiiu':
+      style.sheet.insertRule(
+        sideSelector + ' {display: block !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        sideSelector + ' h5 {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox .usertext-body .md h3 {right: 21.5px !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        headerSelector + ' input[name="uh"] ~ a::after {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        '.logout.hover a {padding-right: 0 !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        '.toggle-sidebar {color: #cdcdcd; padding-right: 21px}',
         style.sheet.cssRules.length
       );
       break;
@@ -133,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Page specific classes for compatibility
     switch (page) {
       case 'r/movies':
+      case 'r/wiiu':
         header.classList.toggle('side-toggle');
         break;
     }
