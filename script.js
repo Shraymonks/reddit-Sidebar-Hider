@@ -85,6 +85,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
   // Page specific compatibility CSS
   var headerSelector = isHidden ? '#header-bottom-right:not(.side-toggle)' : '#header-bottom-right.side-toggle';
   switch (page) {
+    case 'r/everythingscience':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox h6:nth-of-type(1) {right: 10px !important}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/magictcg':
       style.sheet.insertRule(
         sideSelector + ' .titlebox .usertext-body .md h6 {right: 5px !important}',
@@ -104,6 +110,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
       style.sheet.insertRule(
         headerSelector + ' .usertext-body h3:last-of-type a,' +
         headerSelector + ' input[name="uh"] ~ a::after {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      break;
+    case 'r/science':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox h6:nth-of-type(1) {right: 10px !important}',
         style.sheet.cssRules.length
       );
       break;
