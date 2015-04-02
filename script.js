@@ -91,6 +91,16 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         style.sheet.cssRules.length
       );
       break;
+    case 'r/hearthstone':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox .redditname {display: block !important}',
+        style.sheet.cssRules.length
+      );
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox .redditname a {right: 50px}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/magictcg':
       style.sheet.insertRule(
         sideSelector + ' .titlebox .usertext-body .md h6 {right: 5px !important}',
