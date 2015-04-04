@@ -107,6 +107,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         style.sheet.cssRules.length
       );
       break;
+    case 'r/mechanicalkeyboards':
+      style.sheet.insertRule(
+        sideSelector + ' .titlebox .usertext-body .md h2 a {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/movies':
       style.sheet.insertRule(
         sideSelector + ' .titlebox > .subscribers,' +
