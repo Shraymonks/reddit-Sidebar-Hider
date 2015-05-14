@@ -91,6 +91,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         style.sheet.cssRules.length
       );
       break;
+    case 'r/gameofthrones':
+      style.sheet.insertRule(
+        sideSelector + ' {display: none !important}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/hearthstone':
       style.sheet.insertRule(
         sideSelector + ' .titlebox .redditname {display: block !important}',
