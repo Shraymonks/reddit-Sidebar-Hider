@@ -141,6 +141,12 @@ chrome.storage.local.get({isHidden: false, pageStyles: {}}, function(items) {
         style.sheet.cssRules.length
       );
       break;
+    case 'r/truedetective':
+      style.sheet.insertRule(
+        sideSelector + ' h3:nth-child(5) {display: none}',
+        style.sheet.cssRules.length
+      );
+      break;
     case 'r/wiiu':
       style.sheet.insertRule(
         sideSelector + ' {display: block !important}',
